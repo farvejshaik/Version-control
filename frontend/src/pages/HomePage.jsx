@@ -18,23 +18,14 @@ const HomePage = () => {
     async (username = "farvejshaik") => {
       setLoading(true);
       try {
-        const UserRes = await fetch(
-          `https://api.github.com/users/${username}`,
-          {
-            headers: {
-              authorization: `token ${import.meta.env.VITE_GITHUB_API_KEY}`,
-            },
-          }
+        const res = await fetch(
+          `http://localhost:5001/api/users/profile/${username}`
         );
-        const userProfile = await UserRes.json();
-        setUserProfile(userProfile);
-
-        const repoRes = await fetch(userProfile.repos_url);
-        const repos = await repoRes.json();
+        const { repos, userProfile } = await res.json();
         repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setRepos(repos);
-        console.log("UserProfile:", userProfile);
-        console.log("Repos:", repos);
+        setUserProfile(userProfile);
+
         return { userProfile, repos };
       } catch (error) {
         toast.error(error.message);
