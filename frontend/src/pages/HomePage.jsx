@@ -18,9 +18,7 @@ const HomePage = () => {
     async (username = "farvejshaik") => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `http://localhost:5001/api/users/profile/${username}`
-        );
+        const res = await fetch(`/api/users/profile/${username}`);
         const { repos, userProfile } = await res.json();
         repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
         setRepos(repos);
@@ -56,7 +54,7 @@ const HomePage = () => {
     if (sortType === "recent") {
       repos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
     } else if (sortType === "stars") {
-      repos.sort((a, b) => (b.stargazers_count = a.stargazers_count));
+      repos.sort((a, b) => b.stargazers_count - a.stargazers_count);
     } else if (sortType === "forks") {
       repos.sort((a, b) => b.forks_count - a.forks_count);
     }
