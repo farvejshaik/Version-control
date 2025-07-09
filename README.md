@@ -2,6 +2,8 @@
 
 A modern full-stack web application that allows users to explore GitHub profiles, repositories, and interact with other users through a social-like interface. Built with React.js frontend and Node.js/Express backend with MongoDB database.
 
+[Live Demo](https://version-control-yaam.onrender.com/) 
+
 ## Features
 
 - **GitHub Authentication**: Secure OAuth login using GitHub accounts
